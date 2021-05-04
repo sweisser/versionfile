@@ -23,40 +23,47 @@ enum SubCommand {
     #[clap(version = "1.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
     Get(Get),
     Add(Add),
+    Env,
     Major(Major),
     Minor(Minor),
     Patch(Patch),
 }
 
-/// A subcommand for getting a components current version
+/// Get a components current version
 #[derive(Clap)]
 struct Get {
     /// The component inside the versions file.
     component: String,
 }
 
-/// A subcommand for adding components
+/// Add components
 #[derive(Clap)]
 struct Add {
     /// The component inside the versions file.
     component: String,
 }
 
-/// A subcommand for increasing major version components
+/// Populate environment variables
+#[derive(Clap)]
+struct Env {
+
+}
+
+/// Increase major version components
 #[derive(Clap)]
 struct Major {
     /// The component inside the versions file.
     component: String,
 }
 
-/// A subcommand for increasing minor version components
+/// Increase minor version components
 #[derive(Clap)]
 struct Minor {
     /// The component inside the versions file.
     component: String,
 }
 
-/// A subcommand for increasing patch version components
+/// Increase patch version components
 #[derive(Clap)]
 struct Patch {
     /// The component inside the versions file.
@@ -95,9 +102,16 @@ fn main() {
             version_file.inc(&t.component, increment_patch);
             write_yaml(&opts.config, &version_file);
         }
+        SubCommand::Env => {
+            version_file
+                .versions
+                .iter()
+                .for_each(|(k, v)| {
+                    let env_var_name = format!("VERSION_{}", k);
+                    std::env::set_var(env_var_name, v)
+                });
+        }
     }
-
-    // more program logic goes here...
 }
 
 fn read_yaml(configfile: &PathBuf) -> VersionFile {
