@@ -1,4 +1,4 @@
-# VersionFile
+# versionfile
 A little commandline tool to keep versions for different components in a small YAML file.
 
 Use it together with Makefiles and Jenkins Pipelines.
