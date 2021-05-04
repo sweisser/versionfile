@@ -107,8 +107,10 @@ fn main() {
                 .versions
                 .iter()
                 .for_each(|(k, v)| {
-                    let env_var_name = format!("VERSION_{}", k);
-                    std::env::set_var(env_var_name, v)
+                    let env_var_name = format!("VERSION_{}", k.to_uppercase());
+                    // Not working yet.... How to export ?
+                    std::env::set_var(&env_var_name, v);
+                    println!("{}: {}", &env_var_name, &v);
                 });
         }
     }
