@@ -49,55 +49,34 @@ versions:
 Now, in your Makefiles, Shellscripts or Jenkinsfiles, you can query each components version.
 
 Query the version for a single components:
-````
-$ versionfile get 'server'
-````
-````
-0.0.1
-````
-````
-$ versionfile get 'client'
-````
-````
-0.2.0
-````
+
+    $ versionfile get 'server'
+    0.0.1
+
+    $ versionfile get 'client'
+    0.2.0
+
 
 ### Increasing versions for a component
 
-````
-$ versionfile major 'client'
-````
-````
-1.0.0
-````
-````
-$ versionfile minor 'client'
-````
-````
-1.1.0
-````
-````
-$ versionfile patch 'server'
-````
-````
-0.0.2
-````
+    $ versionfile major 'client'
+    1.0.0
+
+    $ versionfile minor 'client'
+    1.1.0
+
+    $ versionfile patch 'server'
+    0.0.2
 
 ### Versionfile location
 
 Versionfile will be searched in current directory, or you can specify the location explicitly: 
-````
-$ versionfile -c ../version.yaml get 'server'
-````
-````
-0.0.2
-````
+
+    $ versionfile -c ../version.yaml get 'server'
+    0.0.2
 
 ### Add a component
-````
-$ versionfile add 'proxy'
-$ versionfile get 'proxy'
-````
-````
-0.0.1
-````
+
+    $ versionfile add 'proxy'
+    $ versionfile get 'proxy'
+    0.0.1
