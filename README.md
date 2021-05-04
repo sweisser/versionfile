@@ -80,3 +80,12 @@ Versionfile will be searched in current directory, or you can specify the locati
     $ versionfile add 'proxy'
     $ versionfile get 'proxy'
     0.0.1
+
+## Build
+
+You need to have Rust installed (e.g. via https://rustup.rs/)
+
+Then it's just the usual:
+
+    $ cargo build --release
+
