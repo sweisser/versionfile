@@ -56,6 +56,24 @@ Query the version for a single components:
     $ versionfile get 'client'
     0.2.0
 
+### Makefile usage
+
+You can use versionfile to set variables in a Makefile:
+
+````
+VERSION_CLIENT:=$(shell versionfile get client)
+
+example:
+echo "Client version is $(VERSION_CLIENT)"
+````
+
+### Environment variables
+
+Our to set environment variables:
+
+````
+export VERSION_CLIENT=`versionfile get client`
+````
 
 ### Increasing versions for a component
 
@@ -80,6 +98,9 @@ Versionfile will be searched in current directory, or you can specify the locati
     $ versionfile add 'proxy'
     $ versionfile get 'proxy'
     0.0.1
+
+
+
 
 ## Build
 
