@@ -64,7 +64,7 @@ You can use versionfile to set variables in a Makefile:
 VERSION_CLIENT:=$(shell versionfile get client)
 
 example:
-echo "Client version is $(VERSION_CLIENT)"
+    echo "Client version is $(VERSION_CLIENT)"
 ````
 
 ### Environment variables
