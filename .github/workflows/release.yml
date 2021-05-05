@@ -1,6 +1,8 @@
 name: Release
 
 on:
+  push:
+    branches: [ main ]
   release:
     types: [created]
 
@@ -20,3 +22,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUSTTARGET: ${{ matrix.target }}
           EXTRA_FILES: "README.md"
+
+# curl -X POST -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/sweisser/versionfile/releases -d '{"tag_name":"v1.0.0"}'
