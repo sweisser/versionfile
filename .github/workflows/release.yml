@@ -4,9 +4,6 @@ on:
   release:
     types: [created]
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
   release:
     name: release ${{ matrix.target }}
