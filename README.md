@@ -48,7 +48,7 @@ versions:
 
 Now, in your Makefiles, Shellscripts or Jenkinsfiles, you can query each components version.
 
-Query the version for a single components:
+Query the version for a single component:
 
     $ versionfile get 'server'
     0.0.1
@@ -69,7 +69,7 @@ example:
 
 ### Environment variables
 
-Our to set environment variables:
+Or to set environment variables:
 
 ````
 export VERSION_CLIENT=`versionfile get client`
@@ -98,8 +98,6 @@ Versionfile will be searched in current directory, or you can specify the locati
     $ versionfile add 'proxy'
     $ versionfile get 'proxy'
     0.0.1
-
-
 
 
 ## Build
