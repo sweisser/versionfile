@@ -99,6 +99,7 @@ Versionfile will be searched in current directory, or you can specify the locati
     $ versionfile get 'proxy'
     0.0.1
 
+(Or add them directly in the YAML file.)
 
 ## Build
 
