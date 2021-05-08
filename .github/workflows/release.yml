@@ -59,6 +59,8 @@ jobs:
           use-cross: ${{ matrix.use-cross }}
           command: build
           args: --release --target ${{ matrix.target }}
+      - name: List workspace
+        run: ls -lR
 
       - name: Build archive
         shell: bash
