@@ -1,22 +1,88 @@
-name: Release
-
+name: release
 on:
-  release:
-    types: [created]
-
+  push:
+    tags:
+      - 'v*'
 jobs:
-  release:
-    name: release ${{ matrix.target }}
+  create-release:
+    name: create-release
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        target: [x86_64-pc-windows-gnu, x86_64-unknown-linux-musl]
+    outputs:
+      upload_url: ${{ steps.release.outputs.upload_url }}
     steps:
-      - uses: actions/checkout@master
-      - name: Compile and release
-        uses: rust-build/rust-build.action@latest
+      - name: Create GitHub release
+        id: release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUSTTARGET: ${{ matrix.target }}
-          EXTRA_FILES: "README.md"
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+
+  build-release:
+    name: build-release
+    needs: create-release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        build: [linux-amd64, macos, windows-64bit]
+        toolchain: [stable]
+        include:
+          - build: linux-amd64
+            os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            use-cross: true
+          - build: macos
+            os: macos-latest
+            target: x86_64-apple-darwin
+            use-cross: false
+          - build: windows-64bit
+            os: windows-latest
+            target: x86_64-pc-windows-msvc
+            use-cross: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          target: ${{ matrix.target }}
+          profile: minimal
+          override: true
+
+      - name: Build release binary
+        uses: actions-rs/cargo@v1
+        with:
+          use-cross: ${{ matrix.use-cross }}
+          command: build
+          args: --release --target ${{ matrix.target }}
+
+      - name: Build archive
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/}"
+
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            ARCHIVE="versionfile-$VERSION-${{ matrix.build }}.zip"
+            cp "target/${{ matrix.target }}/release/versionfile" "versionfile"
+            7z a "$ARCHIVE" "versionfile"
+            echo "ASSET=$ARCHIVE" >> $GITHUB_ENV
+          else
+            ARCHIVE="versionfile-$VERSION-${{ matrix.build }}.tar.gz"
+            cp "target/${{ matrix.target }}/release/versionfile" "versionfile"
+            tar -czvf "$ARCHIVE" "versionfile"
+            echo "ASSET=$ARCHIVE" >> $GITHUB_ENV
+          fi
+
+      - name: Upload release archive
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: ${{ env.ASSET }}
+          asset_name: ${{ env.ASSET }}
+          asset_content_type: application/gzip
