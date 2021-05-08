@@ -1,3 +1,5 @@
+[![release](https://github.com/sweisser/versionfile/actions/workflows/release.yml/badge.svg)](https://github.com/sweisser/versionfile/actions/workflows/release.yml)
+
 # versionfile
 A little commandline tool to keep versions for different components in a small YAML file.
 
