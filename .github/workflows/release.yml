@@ -59,8 +59,6 @@ jobs:
           use-cross: ${{ matrix.use-cross }}
           command: build
           args: --release --target ${{ matrix.target }}
-      - name: List workspace
-        run: ls -lR
 
       - name: Build archive
         shell: bash
@@ -69,8 +67,8 @@ jobs:
 
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             ARCHIVE="versionfile-$VERSION-${{ matrix.build }}.zip"
-            cp "target/${{ matrix.target }}/release/versionfile" "versionfile"
-            7z a "$ARCHIVE" "versionfile"
+            cp "target/${{ matrix.target }}/release/versionfile.exe" "versionfile.exe"
+            7z a "$ARCHIVE" "versionfile.exe"
             echo "ASSET=$ARCHIVE" >> $GITHUB_ENV
           else
             ARCHIVE="versionfile-$VERSION-${{ matrix.build }}.tar.gz"
