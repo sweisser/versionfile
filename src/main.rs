@@ -8,7 +8,7 @@ use std::process::exit;
 
 /// A little tool to keep track of your component versions in a small YAML file.
 #[derive(Clap)]
-#[clap(version = "1.0.1", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+#[clap(version = "1.0.3", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
 #[clap(setting = AppSettings::ColoredHelp)]
 struct Opts {
     /// Sets a custom config file. Could have been an Option<T> with no default too
