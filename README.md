@@ -96,6 +96,10 @@ Versionfile will be searched in current directory, or you can specify the locati
     $ versionfile -c ../version.yaml get 'server'
     0.0.2
 
+### List components
+
+    $ versionfile list
+
 ### Add a component
 
     $ versionfile add 'proxy'
@@ -103,6 +107,7 @@ Versionfile will be searched in current directory, or you can specify the locati
     0.0.1
 
 (Or add them directly in the YAML file.)
+
 
 ## Build
 

@@ -9,7 +9,7 @@ use std::process::exit;
 /// A little tool to keep track of your component versions in a small YAML file.
 /// To be used within Makefiles, Jenkinsfiles or Shell Scripts.
 #[derive(Clap)]
-#[clap(version = "1.0.4", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+#[clap(version = "1.0.5", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
 #[clap(setting = AppSettings::ColoredHelp)]
 struct Opts {
     /// Sets a custom config file. Could have been an Option<T> with no default too
@@ -24,6 +24,7 @@ enum SubCommand {
     #[clap(version = "1.0.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
     Get(Get),
     Add(Add),
+    List,
     Env,
     Major(Major),
     Minor(Minor),
@@ -44,11 +45,13 @@ struct Add {
     component: String,
 }
 
+/// List all components and versions
+#[derive(Clap)]
+struct List {}
+
 /// Populate environment variables
 #[derive(Clap)]
-struct Env {
-
-}
+struct Env {}
 
 /// Increase major version components
 #[derive(Clap)]
@@ -82,6 +85,9 @@ fn main() {
     // You can handle information about subcommands by requesting their matches by name
     // (as below), requesting just the name used, or both at the same time
     match opts.subcmd {
+        SubCommand::List => {
+            version_file.list();
+        }
         SubCommand::Get(t) => {
             if let Some(version) = version_file.get(&t.component) {
                 println!("{}", version);
@@ -164,6 +170,12 @@ fn increment_patch(version: &mut Version) {
 impl VersionFile {
     pub fn get(&self, component: &str) -> Option<&String> {
         self.versions.get(component)
+    }
+
+    pub fn list(&self) {
+        self.versions.iter().for_each(|(c, v)| {
+            println!("{}: {}", c, v);
+        })
     }
 
     pub fn add(&mut self, component: &str) {
