@@ -9,7 +9,7 @@ use std::process::exit;
 /// A little tool to keep track of your component versions in a small YAML file.
 /// To be used within Makefiles, Jenkinsfiles or Shell Scripts.
 #[derive(Clap)]
-#[clap(version = "1.0.5", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+#[clap(version = "1.0.6", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
 #[clap(setting = AppSettings::ColoredHelp)]
 struct Opts {
     /// Sets a custom config file. Could have been an Option<T> with no default too
@@ -47,11 +47,13 @@ struct Add {
 
 /// List all components and versions
 #[derive(Clap)]
-struct List {}
+struct List {
+}
 
-/// Populate environment variables
+/// Generate script to populate environment variables
 #[derive(Clap)]
-struct Env {}
+struct Env {
+}
 
 /// Increase major version components
 #[derive(Clap)]
@@ -110,15 +112,7 @@ fn main() {
             write_yaml(&opts.config, &version_file);
         }
         SubCommand::Env => {
-            version_file
-                .versions
-                .iter()
-                .for_each(|(k, v)| {
-                    let env_var_name = format!("VERSION_{}", k.to_uppercase());
-                    // Not working yet.... How to export ?
-                    std::env::set_var(&env_var_name, v);
-                    println!("{}: {}", &env_var_name, &v);
-                });
+            version_file.env();
         }
     }
 }
@@ -175,6 +169,13 @@ impl VersionFile {
     pub fn list(&self) {
         self.versions.iter().for_each(|(c, v)| {
             println!("{}: {}", c, v);
+        })
+    }
+
+    pub fn env(&self) {
+        self.versions.iter().for_each(|(c, v)| {
+            let envvar_name = format!("VERSION_{}", c.to_uppercase());
+            println!("export {}={}", envvar_name, v);
         })
     }
 

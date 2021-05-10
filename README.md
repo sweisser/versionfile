@@ -14,28 +14,31 @@ $ versionfile -h
 ````
 
 ````
-versionfile 1.0
+versionfile 1.0.6
 Stefan Weisser <stefan.weisser@gmail.com>
-A little tool to keep track of your component versions in a small YAML file
+A little tool to keep track of your component versions in a small YAML file. To be used within
+Makefiles, Jenkinsfiles or Shell Scripts
 
 USAGE:
-versionfile [OPTIONS] <SUBCOMMAND>
+    versionfile [OPTIONS] <SUBCOMMAND>
 
 FLAGS:
--h, --help       Prints help information
--V, --version    Prints version information
+    -h, --help       Prints help information
+    -V, --version    Prints version information
 
 OPTIONS:
--c, --config <config>    Sets a custom config file. Could have been an Option<T> with no default
-too [default: versions.yaml]
+    -c, --config <config>    Sets a custom config file. Could have been an Option<T> with no default
+                             too [default: versions.yaml]
 
 SUBCOMMANDS:
-add      A subcommand for adding components
-get      A subcommand for getting a components current version
-help     Prints this message or the help of the given subcommand(s)
-major    A subcommand for increasing major version components
-minor    A subcommand for increasing minor version components
-patch    A subcommand for increasing patch version components
+    add      Add components
+    env      
+    get      Get a components current version
+    help     Prints this message or the help of the given subcommand(s)
+    list     List all components and versions
+    major    Increase major version components
+    minor    Increase minor version components
+    patch    Increase patch version components
 ````
 
 ### Setup
@@ -108,6 +111,9 @@ Versionfile will be searched in current directory, or you can specify the locati
 
 (Or add them directly in the YAML file.)
 
+### Populate environment variables
+
+    $ eval "$(versionfile env)"
 
 ## Build
 
