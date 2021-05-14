@@ -14,9 +14,9 @@ $ versionfile -h
 ````
 
 ````
-versionfile 1.0.6
+versionfile 1.0.7
 Stefan Weisser <stefan.weisser@gmail.com>
-A little tool to keep track of your component versions in a small YAML file. To be used within
+A little tool to keep track of your component versions in a small YAML file. To be used in
 Makefiles, Jenkinsfiles or Shell Scripts
 
 USAGE:
@@ -27,18 +27,19 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-    -c, --config <config>    Sets a custom config file. Could have been an Option<T> with no default
-                             too [default: versions.yaml]
+    -c, --config <config>    Sets a custom config file [default: versions.yaml]
 
 SUBCOMMANDS:
-    add      Add components
-    env      
-    get      Get a components current version
-    help     Prints this message or the help of the given subcommand(s)
-    list     List all components and versions
-    major    Increase major version components
-    minor    Increase minor version components
-    patch    Increase patch version components
+    add         Add components
+    env         
+    get         Get a components current version
+    get-toml    Get version from a Cargo.toml
+    help        Prints this message or the help of the given subcommand(s)
+    list        
+    major       Increase major version components
+    minor       Increase minor version components
+    patch       Increase patch version components
+
 ````
 
 ### Setup
@@ -52,6 +53,8 @@ versions:
   client: 0.2.0
 ````
 
+### Usage
+
 Now, in your Makefiles, Shellscripts or Jenkinsfiles, you can query each components version.
 
 Query the version for a single component:
@@ -61,6 +64,12 @@ Query the version for a single component:
 
     $ versionfile get 'client'
     0.2.0
+
+Versions inside a Cargo.toml can also be read (but not modified yet):
+
+    $ versionfile get-toml -d .
+    1.0.7
+
 
 ### Makefile usage
 

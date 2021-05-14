@@ -7,12 +7,12 @@ use semver::Version;
 use std::process::exit;
 
 /// A little tool to keep track of your component versions in a small YAML file.
-/// To be used within Makefiles, Jenkinsfiles or Shell Scripts.
+/// To be used in Makefiles, Jenkinsfiles or Shell Scripts.
 #[derive(Clap)]
-#[clap(version = "1.0.6", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+#[clap(version = "1.0.7", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
 #[clap(setting = AppSettings::ColoredHelp)]
 struct Opts {
-    /// Sets a custom config file. Could have been an Option<T> with no default too
+    /// Sets a custom config file.
     #[clap(short, long, default_value = "versions.yaml")]
     config: PathBuf,
     #[clap(subcommand)]
@@ -23,6 +23,7 @@ struct Opts {
 enum SubCommand {
     #[clap(version = "1.0.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
     Get(Get),
+    GetToml(GetToml),
     Add(Add),
     List,
     Env,
@@ -31,45 +32,53 @@ enum SubCommand {
     Patch(Patch),
 }
 
-/// Get a components current version
+/// Get a components current version.
 #[derive(Clap)]
 struct Get {
     /// The component inside the versions file.
     component: String,
 }
 
-/// Add components
+/// Get version from a Cargo.toml
+#[derive(Clap)]
+struct GetToml {
+    /// The directory to read the Cargo.toml from.
+    #[clap(short, long)]
+    dir: Option<String>,
+}
+
+/// Add components.
 #[derive(Clap)]
 struct Add {
     /// The component inside the versions file.
     component: String,
 }
 
-/// List all components and versions
+/// List all components and versions.
 #[derive(Clap)]
 struct List {
 }
 
-/// Generate script to populate environment variables
+/// Generate script to populate environment variables.
 #[derive(Clap)]
 struct Env {
 }
 
-/// Increase major version components
+/// Increase major version components.
 #[derive(Clap)]
 struct Major {
     /// The component inside the versions file.
     component: String,
 }
 
-/// Increase minor version components
+/// Increase minor version components.
 #[derive(Clap)]
 struct Minor {
     /// The component inside the versions file.
     component: String,
 }
 
-/// Increase patch version components
+/// Increase patch version components.
 #[derive(Clap)]
 struct Patch {
     /// The component inside the versions file.
@@ -79,13 +88,8 @@ struct Patch {
 fn main() {
     let opts: Opts = Opts::parse();
 
-    // Gets a value for config if supplied by user, or defaults to "versions.yaml"
-    // println!("Value for config: {:?}", &opts.config);
-
     let mut version_file: VersionFile = read_yaml(&opts.config);
 
-    // You can handle information about subcommands by requesting their matches by name
-    // (as below), requesting just the name used, or both at the same time
     match opts.subcmd {
         SubCommand::List => {
             version_file.list();
@@ -93,6 +97,15 @@ fn main() {
         SubCommand::Get(t) => {
             if let Some(version) = version_file.get(&t.component) {
                 println!("{}", version);
+            }
+        }
+        SubCommand::GetToml(t) => {
+            if let Some(dir) = t.dir {
+                if let Some(version) = read_version(&dir) {
+                    println!("{}", version);
+                } else {
+                    println!("Error");
+                }
             }
         }
         SubCommand::Add(t) => {
@@ -138,7 +151,7 @@ fn write_yaml(configfile: &PathBuf, versions: &VersionFile) {
         .write(true)
         .create(true)
         .open(configfile)
-        .expect("Could not open versionfile for writing.");
+        .expect("Couldn't open versionfile for writing.");
 
     let _res = serde_yaml::to_writer(file, versions);
 }
@@ -195,7 +208,7 @@ impl VersionFile {
                         println!("{}", bugfix_release.to_string());
                     }
                     Err(e) => {
-                        eprintln!("Couldnt parse version {} as semver: {}", current_version, e);
+                        eprintln!("Couldn't parse version {} as semver: {}", current_version, e);
                     }
                 }
             }
@@ -206,3 +219,21 @@ impl VersionFile {
     }
 }
 
+
+fn read_version(dir: &str) -> Option<String> {
+    let filename = PathBuf::from(dir).join("Cargo.toml");
+    match cargo_toml::Manifest::from_path(&filename) {
+        Ok(contents) => {
+            match contents.package {
+                Some(package) => {
+                    Some(package.version)
+                }
+                None => None
+            }
+        }
+        Err(e) => {
+            eprintln!("Error reading {:?}: {}", &filename, e);
+            None
+        }
+    }
+}

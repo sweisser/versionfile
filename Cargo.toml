@@ -1,6 +1,6 @@
 [package]
 name = "versionfile"
-version = "1.0.6"
+version = "1.0.7"
 authors = ["Stefan Weisser <stefan.weisser@googlemail.com>"]
 edition = "2018"
 
@@ -11,3 +11,4 @@ clap = "3.0.0-beta.2"
 serde = { version = "1.0", features = ["derive"] }
 serde_yaml = "0.8"
 semver = "0.11"
+cargo_toml = "0.9.1"
