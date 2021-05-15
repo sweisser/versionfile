@@ -95,11 +95,7 @@ export VERSION_CLIENT=`versionfile get client`
 Example how versionfile can be used inside a pipeline to version your components:
 
     stage('Build Client Application') {
-      agent {
-        docker {
-          image 'stefan/jenkins-slave-npm:latest'
-        }
-      }
+      agent any
 
       environment {
         CLIENT_VERSION = "${sh(returnStdout: true, script: './versionfile get client')}".trim()
