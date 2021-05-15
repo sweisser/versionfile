@@ -9,7 +9,7 @@ use std::process::exit;
 /// A little tool to keep track of your component versions in a small YAML file.
 /// To be used in Makefiles, Jenkinsfiles or Shell Scripts.
 #[derive(Clap)]
-#[clap(version = "1.0.7", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+#[clap(version = "2.0.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
 #[clap(setting = AppSettings::ColoredHelp)]
 struct Opts {
     /// Sets a custom config file.
@@ -23,7 +23,7 @@ struct Opts {
 enum SubCommand {
     #[clap(version = "1.0.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
     Get(Get),
-    GetToml(GetToml),
+    GetCargo(GetCargo),
     Add(Add),
     List,
     Env,
@@ -39,12 +39,11 @@ struct Get {
     component: String,
 }
 
-/// Get version from a Cargo.toml
+/// Get version from a Cargo.toml (Rust projects).
 #[derive(Clap)]
-struct GetToml {
+struct GetCargo {
     /// The directory to read the Cargo.toml from.
-    #[clap(short, long)]
-    dir: Option<String>,
+    dir: String,
 }
 
 /// Add components.
@@ -64,21 +63,21 @@ struct List {
 struct Env {
 }
 
-/// Increase major version components.
+/// Increase a components major version.
 #[derive(Clap)]
 struct Major {
     /// The component inside the versions file.
     component: String,
 }
 
-/// Increase minor version components.
+/// Increase a components minor version.
 #[derive(Clap)]
 struct Minor {
     /// The component inside the versions file.
     component: String,
 }
 
-/// Increase patch version components.
+/// Increase a components patch version.
 #[derive(Clap)]
 struct Patch {
     /// The component inside the versions file.
@@ -99,13 +98,11 @@ fn main() {
                 println!("{}", version);
             }
         }
-        SubCommand::GetToml(t) => {
-            if let Some(dir) = t.dir {
-                if let Some(version) = read_version(&dir) {
-                    println!("{}", version);
-                } else {
-                    println!("Error");
-                }
+        SubCommand::GetCargo(t) => {
+            if let Some(version) = read_version(&t.dir) {
+                println!("{}", version);
+            } else {
+                println!("Error");
             }
         }
         SubCommand::Add(t) => {
