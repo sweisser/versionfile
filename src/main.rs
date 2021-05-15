@@ -9,7 +9,7 @@ use std::process::exit;
 /// A little tool to keep track of your component versions in a small YAML file.
 /// To be used in Makefiles, Jenkinsfiles or Shell Scripts.
 #[derive(Clap)]
-#[clap(version = "2.0.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+#[clap(version = "2.1.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
 #[clap(setting = AppSettings::ColoredHelp)]
 struct Opts {
     /// Sets a custom config file.
@@ -22,6 +22,7 @@ struct Opts {
 #[derive(Clap)]
 enum SubCommand {
     #[clap(version = "1.0.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+    Init,
     Get(Get),
     GetCargo(GetCargo),
     Add(Add),
@@ -30,6 +31,11 @@ enum SubCommand {
     Major(Major),
     Minor(Minor),
     Patch(Patch),
+}
+
+/// Create a new versions.yaml.
+#[derive(Clap)]
+struct Init {
 }
 
 /// Get a components current version.
@@ -87,14 +93,18 @@ struct Patch {
 fn main() {
     let opts: Opts = Opts::parse();
 
-    let mut version_file: VersionFile = read_yaml(&opts.config);
 
     match opts.subcmd {
-        SubCommand::List => {
+        SubCommand::Init => {
+            let version_file = VersionFile::new();
+            write_yaml(&opts.config, &version_file);
             version_file.list();
         }
+        SubCommand::List => {
+            read_yaml(&opts.config).list();
+        }
         SubCommand::Get(t) => {
-            if let Some(version) = version_file.get(&t.component) {
+            if let Some(version) = read_yaml(&opts.config).get(&t.component) {
                 println!("{}", version);
             }
         }
@@ -106,23 +116,27 @@ fn main() {
             }
         }
         SubCommand::Add(t) => {
+            let mut version_file: VersionFile = read_yaml(&opts.config);
             version_file.add(&t.component);
             write_yaml(&opts.config, &version_file);
         }
         SubCommand::Major(t) => {
+            let mut version_file: VersionFile = read_yaml(&opts.config);
             version_file.inc(&t.component, increment_major);
             write_yaml(&opts.config, &version_file);
         }
         SubCommand::Minor(t) => {
+            let mut version_file: VersionFile = read_yaml(&opts.config);
             version_file.inc(&t.component, increment_minor);
             write_yaml(&opts.config, &version_file);
         }
         SubCommand::Patch(t) => {
+            let mut version_file: VersionFile = read_yaml(&opts.config);
             version_file.inc(&t.component, increment_patch);
             write_yaml(&opts.config, &version_file);
         }
         SubCommand::Env => {
-            version_file.env();
+            read_yaml(&opts.config).env();
         }
     }
 }
@@ -172,6 +186,12 @@ fn increment_patch(version: &mut Version) {
 
 
 impl VersionFile {
+    pub fn new() -> VersionFile {
+        VersionFile {
+            versions: HashMap::new()
+        }
+    }
+
     pub fn get(&self, component: &str) -> Option<&String> {
         self.versions.get(component)
     }
