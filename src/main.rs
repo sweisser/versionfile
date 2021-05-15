@@ -22,68 +22,68 @@ struct Opts {
 #[derive(Clap)]
 enum SubCommand {
     #[clap(version = "1.0.0", author = "Stefan Weisser <stefan.weisser@gmail.com>")]
+    /// Create a new versions.yaml
     Init,
+    /// Get a components current version
     Get(Get),
+    /// Get version from a Cargo.toml (Rust projects)
     GetCargo(GetCargo),
+    /// Add components
     Add(Add),
+    /// List all components and versions
     List,
+    /// Generate script to populate environment variables
     Env,
+    /// Increase a components major version
     Major(Major),
+    /// Increase a components minor version
     Minor(Minor),
+    /// Increase a components patch version
     Patch(Patch),
 }
 
-/// Create a new versions.yaml.
 #[derive(Clap)]
 struct Init {
 }
 
-/// Get a components current version.
 #[derive(Clap)]
 struct Get {
-    /// The component inside the versions file.
+    /// The component inside the versions file
     component: String,
 }
 
-/// Get version from a Cargo.toml (Rust projects).
 #[derive(Clap)]
 struct GetCargo {
-    /// The directory to read the Cargo.toml from.
+    /// The directory to read the Cargo.toml from
     dir: String,
 }
 
-/// Add components.
 #[derive(Clap)]
 struct Add {
     /// The component inside the versions file.
     component: String,
 }
 
-/// List all components and versions.
 #[derive(Clap)]
 struct List {
 }
 
-/// Generate script to populate environment variables.
 #[derive(Clap)]
 struct Env {
 }
 
-/// Increase a components major version.
 #[derive(Clap)]
 struct Major {
     /// The component inside the versions file.
     component: String,
 }
 
-/// Increase a components minor version.
 #[derive(Clap)]
 struct Minor {
     /// The component inside the versions file.
     component: String,
 }
 
-/// Increase a components patch version.
 #[derive(Clap)]
 struct Patch {
     /// The component inside the versions file.
@@ -154,12 +154,12 @@ fn read_yaml(configfile: &PathBuf) -> VersionFile {
     }
 }
 
+// Rad this: https://ddanilov.me/how-to-overwrite-a-file-in-rust
 fn write_yaml(configfile: &PathBuf, versions: &VersionFile) {
     use std::fs::OpenOptions;
-
     let file = OpenOptions::new()
-        .read(true)
         .write(true)
+        .truncate(true)
         .create(true)
         .open(configfile)
         .expect("Couldn't open versionfile for writing.");
@@ -203,6 +203,7 @@ impl VersionFile {
     }
 
     pub fn env(&self) {
+        // TODO Some component names are unsuitable for being used directly here.
         self.versions.iter().for_each(|(c, v)| {
             let envvar_name = format!("VERSION_{}", c.to_uppercase());
             println!("export {}={}", envvar_name, v);

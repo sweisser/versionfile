@@ -6,6 +6,9 @@ A little commandline tool to keep versions for different components in a small Y
 
 Use it together with Makefiles and Jenkins Pipelines.
 
+
+![alt text](render.gif)
+
 ## Usage
 
 ### Help
@@ -14,7 +17,7 @@ $ versionfile -h
 ````
 
 ````
-versionfile 2.0.0
+versionfile 2.1.0
 Stefan Weisser <stefan.weisser@gmail.com>
 A little tool to keep track of your component versions in a small YAML file. To be used in
 Makefiles, Jenkinsfiles or Shell Scripts
@@ -31,11 +34,12 @@ OPTIONS:
 
 SUBCOMMANDS:
     add          Add components
-    env          
+    env          Generate script to populate environment variables
     get          Get a components current version
     get-cargo    Get version from a Cargo.toml (Rust projects)
     help         Prints this message or the help of the given subcommand(s)
-    list         
+    init         Create a new versions.yaml
+    list         List all components and versions
     major        Increase a components major version
     minor        Increase a components minor version
     patch        Increase a components patch version
@@ -52,6 +56,11 @@ versions:
   server: 0.0.1
   client: 0.2.0
 ````
+
+You can also use the 'init' subcommand to create an empty versions.yaml:
+
+    $ versionfile init
+
 
 ### Usage
 
