@@ -90,6 +90,39 @@ Or to set environment variables:
 export VERSION_CLIENT=`versionfile get client`
 ````
 
+### Jenkins Pipeline
+
+Example how versionfile can be used inside a pipeline to version your components:
+
+    stage('Build Client Application') {
+      agent {
+        docker {
+          image 'stefan/jenkins-slave-npm:latest'
+        }
+      }
+
+      environment {
+        CLIENT_VERSION = "${sh(returnStdout: true, script: './versionfile get client')}".trim()
+      }
+
+      steps {
+        sh 'make client'
+        archiveArtifacts artifacts: 'client.tar.bz2'
+
+        nexusArtifactUploader artifacts: [
+            [artifactId: 'client', classifier: 'release', file: 'client.tar.bz2', type: 'tar.bz2'],
+          ],
+          credentialsId: 'jenkins_nexus_upload_user',
+          groupId: 'org.coolapp',
+          nexusUrl: 'localhost:8081',
+          nexusVersion: 'nexus3',
+          protocol: 'http',
+          repository: 'maven-releases',
+          version: "${env.CLIENT_VERSION}"
+      }
+    }
+
+
 ### Increasing versions for a component
 
     $ versionfile major 'client'
