@@ -1,0 +1,462 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /mnt/nvme1/projects/RustProjects/versionfile
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 80
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 30
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 1000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: solid
+    title: null
+    style:
+      boxShadow: none
+      margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "JetBrains Mono, Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 498
+    content: "\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 81
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 300
+    content: v
+  - delay: 170
+    content: e
+  - delay: 140
+    content: r
+  - delay: 370
+    content: s
+  - delay: 130
+    content: i
+  - delay: 160
+    content: o
+  - delay: 190
+    content: 'n'
+  - delay: 180
+    content: f
+  - delay: 160
+    content: i
+  - delay: 580
+    content: l
+  - delay: 190
+    content: e
+  - delay: 540
+    content: ' '
+  - delay: 319
+    content: '-'
+  - delay: 220
+    content: h
+  - delay: 360
+    content: "\r\n"
+  - delay: 5
+    content: "\e[0m\e[0m\e[0m\e[0m\e[0m\e[32mversionfile\e[0m\e[0m \e[0m\e[0m2.1.0\e[0m\e[0m\r\n\e[0m\e[0mStefan Weisser <stefan.weisser@gmail.com>\e[0m\e[0m\r\n\e[0m\e[0m\e[0m\e[0mA little tool to keep track of your component versions in a small YAML file. To be used in\r\nMakefiles, Jenkinsfiles or Shell Scripts\e[0m\e[0m\r\n\e[0m\e[0m\r\n\e[0m\e[0m\e[33mUSAGE:\e[0m\e[0m\r\n    \e[0m\e[0mversionfile [OPTIONS] <SUBCOMMAND>\e[0m\e[0m\r\n\r\n\e[0m\e[0m\e[33mFLAGS:\r\n\e[0m\e[0m    \e[0m\e[0m\e[32m-h\e[0m\e[0m, \e[0m\e[0m\e[32m--help\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mPrints help information\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32m-V\e[0m\e[0m, \e[0m\e[0m\e[32m--version\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mPrints version information\e[0m\e[0m\r\n\r\n\e[0m\e[0m\e[33mOPTIONS:\r\n\e[0m\e[0m    \e[0m\e[0m\e[32m-c\e[0m\e[0m, \e[0m\e[0m\e[32m--config\e[0m\e[0m \e[0m\e[0m\e[32m<config>\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mSets a custom config file [default: versions.yaml]\e[0m\e[0m\r\n\r\n\e[0m\e[0m\e[33mSUBCOMMANDS\e[0m\e[0m\e[33m:\r\n\e[0m\e[0m    \e[0m\e[0m\e[32madd\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mAdd components\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32menv\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mGenerate script to populate environment variables\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32mget\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mGet a components current version\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32mget-cargo\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mGet version from a Cargo.toml (Rust projects)\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32mhelp\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mPrints this message or the help of the given subcommand(s)\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32minit\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mCreate a new versions.yaml\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32mlist\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mList all components and versions\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32mmajor\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mIncrease a components major version\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32mminor\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mIncrease a components minor version\e[0m\e[0m\r\n\e[0m\e[0m    \e[0m\e[0m\e[32mpatch\e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0m \e[0m\e[0mIncrease a components patch version\e[0m\e[0m\e[0m\e[0m\e[0m\e[0m\r\n\e[0m\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 80
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 300
+    content: v
+  - delay: 140
+    content: e
+  - delay: 111
+    content: r
+  - delay: 210
+    content: s
+  - delay: 139
+    content: i
+  - delay: 160
+    content: o
+  - delay: 230
+    content: 'n'
+  - delay: 180
+    content: f
+  - delay: 140
+    content: i
+  - delay: 230
+    content: l
+  - delay: 111
+    content: e
+  - delay: 219
+    content: ' '
+  - delay: 270
+    content: i
+  - delay: 160
+    content: 'n'
+  - delay: 210
+    content: i
+  - delay: 140
+    content: t
+  - delay: 780
+    content: "\r\n"
+  - delay: 6
+    content: "\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 83
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 300
+    content: v
+  - delay: 180
+    content: e
+  - delay: 150
+    content: r
+  - delay: 300
+    content: s
+  - delay: 120
+    content: i
+  - delay: 160
+    content: o
+  - delay: 210
+    content: 'n'
+  - delay: 340
+    content: f
+  - delay: 150
+    content: i
+  - delay: 270
+    content: l
+  - delay: 100
+    content: e
+  - delay: 490
+    content: ' '
+  - delay: 220
+    content: a
+  - delay: 210
+    content: d
+  - delay: 170
+    content: d
+  - delay: 180
+    content: ' '
+  - delay: 360
+    content: c
+  - delay: 130
+    content: l
+  - delay: 400
+    content: i
+  - delay: 150
+    content: e
+  - delay: 840
+    content: 'n'
+  - delay: 110
+    content: t
+  - delay: 400
+    content: "\r\n"
+  - delay: 5
+    content: "\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 83
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 850
+    content: v
+  - delay: 120
+    content: e
+  - delay: 120
+    content: r
+  - delay: 221
+    content: s
+  - delay: 119
+    content: i
+  - delay: 150
+    content: o
+  - delay: 190
+    content: 'n'
+  - delay: 140
+    content: f
+  - delay: 160
+    content: i
+  - delay: 250
+    content: l
+  - delay: 100
+    content: e
+  - delay: 570
+    content: ' '
+  - delay: 230
+    content: l
+  - delay: 210
+    content: i
+  - delay: 70
+    content: s
+  - delay: 150
+    content: t
+  - delay: 240
+    content: "\r\n"
+  - delay: 5
+    content: "client: 0.0.1\r\n\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 86
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 300
+    content: v
+  - delay: 130
+    content: e
+  - delay: 120
+    content: r
+  - delay: 220
+    content: s
+  - delay: 130
+    content: i
+  - delay: 170
+    content: o
+  - delay: 180
+    content: 'n'
+  - delay: 220
+    content: f
+  - delay: 120
+    content: i
+  - delay: 250
+    content: l
+  - delay: 110
+    content: e
+  - delay: 640
+    content: ' '
+  - delay: 300
+    content: m
+  - delay: 300
+    content: i
+  - delay: 230
+    content: 'n'
+  - delay: 320
+    content: o
+  - delay: 140
+    content: r
+  - delay: 450
+    content: ' '
+  - delay: 650
+    content: c
+  - delay: 100
+    content: l
+  - delay: 260
+    content: i
+  - delay: 90
+    content: e
+  - delay: 170
+    content: 'n'
+  - delay: 80
+    content: t
+  - delay: 410
+    content: "\r\n"
+  - delay: 5
+    content: "0.1.0\r\n\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 78
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 300
+    content: v
+  - delay: 160
+    content: e
+  - delay: 131
+    content: r
+  - delay: 239
+    content: s
+  - delay: 90
+    content: i
+  - delay: 200
+    content: o
+  - delay: 210
+    content: 'n'
+  - delay: 140
+    content: f
+  - delay: 140
+    content: i
+  - delay: 280
+    content: l
+  - delay: 110
+    content: e
+  - delay: 710
+    content: ' '
+  - delay: 300
+    content: e
+  - delay: 250
+    content: 'n'
+  - delay: 80
+    content: v
+  - delay: 1990
+    content: "\r\nexport VERSION_CLIENT=0.1.0\r\n\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 85
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 300
+    content: e
+  - delay: 400
+    content: v
+  - delay: 350
+    content: a
+  - delay: 311
+    content: l
+  - delay: 919
+    content: ' '
+  - delay: 300
+    content: $
+  - delay: 390
+    content: (
+  - delay: 790
+    content: v
+  - delay: 130
+    content: e
+  - delay: 130
+    content: r
+  - delay: 240
+    content: s
+  - delay: 110
+    content: i
+  - delay: 170
+    content: o
+  - delay: 180
+    content: 'n'
+  - delay: 100
+    content: f
+  - delay: 150
+    content: i
+  - delay: 260
+    content: l
+  - delay: 90
+    content: e
+  - delay: 591
+    content: ' '
+  - delay: 139
+    content: e
+  - delay: 200
+    content: 'n'
+  - delay: 90
+    content: v
+  - delay: 500
+    content: )
+  - delay: 300
+    content: "\r\n"
+  - delay: 6
+    content: "\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 85
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 100
+    content: e
+  - delay: 100
+    content: c
+  - delay: 100
+    content: h
+  - delay: 270
+    content: o
+  - delay: 330
+    content: ' '
+  - delay: 360
+    content: $
+  - delay: 300
+    content: V
+  - delay: 270
+    content: E
+  - delay: 250
+    content: R
+  - delay: 240
+    content: S
+  - delay: 170
+    content: I
+  - delay: 150
+    content: O
+  - delay: 160
+    content: 'N'
+  - delay: 340
+    content: _
+  - delay: 300
+    content: C
+  - delay: 310
+    content: L
+  - delay: 210
+    content: I
+  - delay: 100
+    content: E
+  - delay: 160
+    content: 'N'
+  - delay: 90
+    content: T
+  - delay: 430
+    content: "\r\n0.1.0\r\n\e]0;stefan@roadrunner:/mnt/nvme1/projects/RustProjects/versionfile\e\\\e]7;file://roadrunner/mnt/nvme1/projects/RustProjects/versionfile\e\\"
+  - delay: 84
+    content: "\r\n\e[1;36mversionfile\e[0m on \e[1;35m \e[0m\e[1;35mmain\e[0m \e[1;31m[\e[0m\e[1;31m!\e[0m\e[1;31m?\e[0m\e[1;31m]\e[0m is \e[1;38;5;208m\U0001F4E6 \e[0m\e[1;38;5;208mv2.1.0\e[0m via \e[1;31m\U0001F980 \e[0m\e[1;31mv1.52.1\e[0m on \e[1;33m☁️  \e[0m\e[1;33m(\e[0m\e[1;33mus-east-2\e[0m\e[1;33m)\e[0m \r\n\e[1;32m❯\e[0m "
+  - delay: 5202
+    content: "logout\r\n"
