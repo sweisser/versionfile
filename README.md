@@ -2,7 +2,7 @@
 [![release](https://github.com/sweisser/versionfile/actions/workflows/release.yml/badge.svg)](https://github.com/sweisser/versionfile/actions/workflows/release.yml)
 
 # versionfile
-A little commandline tool to keep versions for different components in a small YAML file.
+A little commandline tool to keep versions for different components in a small YAML file and make them available in your environment.
 
 Use it together with Makefiles and Jenkins Pipelines.
 
@@ -148,6 +148,9 @@ Versionfile will be searched in current directory, or you can specify the locati
     0.0.1
 
 (Or add them directly in the YAML file.)
+
+Take care with the naming of the components if you intend to use the 'env' subcommand.
+Some characters, like '-' will cause trouble with the generated export commands.
 
 ### Populate environment variables
 
