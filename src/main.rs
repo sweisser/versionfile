@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
-use std::collections::HashMap;
 use std::path::PathBuf;
+use std::collections::BTreeMap;
 use serde::Deserialize;
 use serde::Serialize;
 use semver::Version;
@@ -120,26 +120,29 @@ fn write_yaml(configfile: &PathBuf, versions: &VersionFile) {
 
 #[derive(Serialize, Deserialize, Debug)]
 struct VersionFile {
-    versions: HashMap<String, String>
+    versions: BTreeMap<String, String>
 }
 
 fn increment_major(version: &mut Version) {
-    version.increment_major()
+    version.major += 1;
+    version.minor = 0;
+    version.patch = 0;
 }
 
 fn increment_minor(version: &mut Version) {
-    version.increment_minor()
+    version.minor += 1;
+    version.patch = 0;
 }
 
 fn increment_patch(version: &mut Version) {
-    version.increment_patch()
+    version.patch += 1;
 }
 
 
 impl VersionFile {
     pub fn new() -> VersionFile {
         VersionFile {
-            versions: HashMap::new()
+            versions: BTreeMap::new()
         }
     }
 
@@ -195,7 +198,16 @@ fn read_version(dir: &str) -> Option<String> {
         Ok(contents) => {
             match contents.package {
                 Some(package) => {
-                    Some(package.version)
+                    match package.version.get() {
+                        Ok(version) => {
+                            Some(String::from(version))
+                        }
+                        Err(err) => {
+                            eprintln!("{}", err);
+                            None
+                        }
+                    }
+
                 }
                 None => None
             }
