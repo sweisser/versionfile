@@ -1,4 +1,4 @@
 ---
 versions:
-  client: 0.1.0
-  server: 0.2.0
+  server: 3.0.0
+  client: 0.6.0

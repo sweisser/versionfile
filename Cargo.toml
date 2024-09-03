@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 clap = { version="4.5.4", features = ["derive"] }
-serde = { version = "1.0.197", features = ["derive"] }
+serde = { version = "1.0.209", features = ["derive"] }
 serde_yaml = "0.9.34"
-semver = "1.0.22"
-cargo_toml = "0.19.2"
+semver = "1.0.23"
+cargo_toml = "0.20.4"
