@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - 'v*'
+
 jobs:
   create-release:
     name: create-release
@@ -43,7 +44,7 @@ jobs:
             use-cross: false
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
