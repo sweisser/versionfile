@@ -11,4 +11,4 @@ clap = { version="4.5.4", features = ["derive"] }
 serde = { version = "1.0.209", features = ["derive"] }
 serde_yaml = "0.9.34"
 semver = "1.0.23"
-cargo_toml = "0.20.4"
+cargo_toml = "0.22.1"
